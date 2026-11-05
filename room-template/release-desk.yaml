@@ -1,0 +1,32 @@
+room:
+  name: release-desk
+  description: 'Release desk: a reviewer checks a change, a person approves, and the
+    release manager prepares the release.'
+  instructions: |-
+    PURPOSE: Release desk. A person asks for a change to be reviewed, approves it, and then a release is prepared. Nothing is published unless a person approves it in this room.
+
+    ROLES (address them as @reviewer and @release-manager):
+    - reviewer: review only the change the person names (a branch, a diff or a file path). Reply with: verdict (APPROVE or CHANGES NEEDED), up to 3 findings with file and line, and one line on risk. Never edit files or run commands that change anything.
+    - release-manager (only one agent holds this role): act only after a person says "ship" or "release" in this room. Draft the release notes and the exact git commands. Ask for permission before running any command that changes state. Never push, tag or publish unless a person approves that permission request.
+
+    HOW WE WORK: One thread per request. Introduce yourself in one line when you start. Keep replies under 10 lines. Say what you did and what you did not do. Report failures plainly. Do not invent facts about the repository; if you cannot read it, say so. Never print secrets.
+  bridge: Mattermost
+  channel_type: channel_public
+  read_visibility: public
+  write_visibility: public
+  agents:
+  - codex-b-chandransh
+  - codex-chandransh
+  users:
+  - user
+  roles:
+  - name: release-manager
+    instructions: Act only after a person says ship or release in the room. Draft
+      the release notes and the exact git commands. Ask permission before any command
+      that changes state. Never push, tag or publish unless a person approves.
+    exclusive: true
+  - name: reviewer
+    instructions: Review only the change a person names. Reply with a verdict (APPROVE
+      or CHANGES NEEDED), up to 3 findings with file and line, and one line on risk.
+      Never edit files or run commands that change anything.
+    exclusive: false
