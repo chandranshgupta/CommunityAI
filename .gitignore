@@ -1,0 +1,9 @@
+# project-preset:begin - managed by the installer; edit outside this block only
+# Agent tooling that is generated or per-machine, kept out of the public repository.
+.agent/
+.claude/skills/
+# Local secrets: the gate expects these to be ignored (PRE-01).
+.env
+.env.*
+!.env.example
+# project-preset:end
